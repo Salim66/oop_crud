@@ -2,18 +2,18 @@
 <?php 
 
 	// Class use
-	use App\Controller\Student;
+	use App\Controller\Teacher;
 
 
 	// Class instant 
-	$student = new Student;
+	$teacher = new Teacher;
 
 	// get data url
 	if ( isset($_GET['delete']) ) {
 		// get value
 		$id = $_GET['delete'];
 
-		$mess = $student -> deleteStudent($id);
+		$mess = $teacher -> deleteTeacher($id);
 	}
 
  ?>
@@ -40,11 +40,11 @@
 			}
 
 		 ?>
-		<a class="btn btn-primary btn-sm" href="index.php">Add new student</a>
+		<a class="btn btn-primary btn-sm" href="teacher_index.php">Add new Teacher</a>
 		<div class="card shadow">
 			<div class="card-body">
 				<h2>All Data</h2>
-				<table class="table table-striped">
+				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -60,7 +60,7 @@
 						<?php 
 
 
-							$data = $student -> allStudent();
+							$data = $teacher -> allTeacher();
 
 							$id = 1;
 							while($fdata = $data -> fetch_assoc()):
@@ -72,10 +72,10 @@
 							<td><?php echo $fdata['name']; ?></td>
 							<td><?php echo $fdata['email']; ?></td>
 							<td><?php echo $fdata['cell']; ?></td>
-							<td><img src="media/img/Student/<?php echo $fdata['photo']; ?>" alt=""></td>
+							<td><img src="media/img/Teacher/<?php echo $fdata['photo']; ?>" alt=""></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="view.php?id=<?php echo $fdata['id']; ?>">View</a>
-								<a class="btn btn-sm btn-warning" href="edit.php?id=<?php echo $fdata['id']; ?>">Edit</a>
+								<a class="btn btn-sm btn-info" href="teacher_view.php?id=<?php echo $fdata['id']; ?>">View</a>
+								<a class="btn btn-sm btn-warning" href="teacher_edit.php?id=<?php echo $fdata['id']; ?>">Edit</a>
 								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $fdata['id']; ?>">Delete</a>
 							</td>
 						</tr>

@@ -2,11 +2,11 @@
 <?php 
 
 	// Class use
-	use App\Controller\Student;
+	use App\Controller\Staff;
 
 
 	// Class instant 
-	$student = new Student;
+	$staff = new Staff;
 
  ?>
 <!DOCTYPE html>
@@ -41,15 +41,15 @@
 			}elseif ( !filter_var($email, FILTER_VALIDATE_EMAIL) ) {
 				$mess = "<p class=\"alert alert-danger\">Invalid email address !<button class=\"close\" data-dismiss=\"alert\">&times;</button></p>";
 			}else{
-				// Add new Student
-				$mess = $student -> addNewStudent($name ,$email, $cell, $photo);
+				// Add new Staff
+				$mess = $staff -> addNewStaff($name ,$email, $cell, $photo);
 			}
 		}
 
 	 ?>
 
 	<div class="wrap">
-		<a class="btn btn-primary btn-sm" href="data.php">All students</a>
+		<a class="btn btn-primary btn-sm" href="staff_data.php">All Staff</a>
 		<div class="card shadow">
 			<div class="card-body">
 				<h2>Sign Up</h2>

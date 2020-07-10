@@ -2,11 +2,11 @@
 <?php 
 
 	// Class use
-	use App\Controller\Student;
+	use App\Controller\Teacher;
 
 
 	// Class instant 
-	$student = new Student;
+	$teacher = new Teacher;
 
  ?>
 <!DOCTYPE html>
@@ -42,14 +42,14 @@
 				$mess = "<p class=\"alert alert-danger\">Invalid email address !<button class=\"close\" data-dismiss=\"alert\">&times;</button></p>";
 			}else{
 				// Add new Student
-				$mess = $student -> addNewStudent($name ,$email, $cell, $photo);
+				$mess = $teacher -> addNewTeacher($name ,$email, $cell, $photo);
 			}
 		}
 
 	 ?>
 
 	<div class="wrap">
-		<a class="btn btn-primary btn-sm" href="data.php">All students</a>
+		<a class="btn btn-primary btn-sm" href="teacher_data.php">All Teacher</a>
 		<div class="card shadow">
 			<div class="card-body">
 				<h2>Sign Up</h2>

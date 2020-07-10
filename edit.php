@@ -8,12 +8,21 @@
 	// Class instant 
 	$student = new Student;
 
+	// get data from url
+	$id="";
+	if ( isset($_GET['id']) ) {
+		$id = $_GET['id'];
+
+		$single_student = $student -> singleStudent($id);
+
+	}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Development Area</title>
+	<title><?php echo $single_student['name']; ?></title>
 	<!-- ALL CSS FILES  -->
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
@@ -26,14 +35,15 @@
 		/**
 		 * Student form data manage
 		 */
-		if ( isset($_POST['submit']) ) {
+		if ( isset($_POST['update']) ) {
 			// Value get
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 			$cell = $_POST['cell'];
 
 			// File get
-			$photo = $_FILES['photo'];
+			$new_photo = $_FILES['new_photo'];
+			$old_photo = $_POST['old-photo'];
 
 			// Form validation student data
 			if ( empty($name) || empty($email) || empty($cell) ) {
@@ -42,9 +52,11 @@
 				$mess = "<p class=\"alert alert-danger\">Invalid email address !<button class=\"close\" data-dismiss=\"alert\">&times;</button></p>";
 			}else{
 				// Add new Student
-				$mess = $student -> addNewStudent($name ,$email, $cell, $photo);
+				$mess = $student -> studentDataUpdate($name, $email, $cell,  $id, $new_photo, $old_photo);
 			}
 		}
+
+
 
 	 ?>
 
@@ -52,7 +64,7 @@
 		<a class="btn btn-primary btn-sm" href="data.php">All students</a>
 		<div class="card shadow">
 			<div class="card-body">
-				<h2>Sign Up</h2>
+				<h2>Update data of: <?php echo $single_student['name']; ?></h2>
 				<?php 
 					/**
 					 * Show all message
@@ -62,25 +74,29 @@
 					}
 
 				 ?>
-				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data">
+				<form action="<?php echo $_SERVER['PHP_SELF'];?>?id=<?php echo $id; ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="">Name</label>
-						<input name="name" class="form-control" type="text">
+						<input name="name" class="form-control" value="<?php echo $single_student['name']; ?>" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Email</label>
-						<input name="email" class="form-control" type="text">
+						<input name="email" class="form-control" value="<?php echo $single_student['email']; ?>" type="text">
 					</div>
 					<div class="form-group">
 						<label for="">Cell</label>
-						<input name="cell" class="form-control" type="text">
+						<input name="cell" class="form-control" value="<?php echo $single_student['cell']; ?>" type="text">
+					</div>
+					<div class="form-group">
+						<img src="media/img/Student/<?php echo $single_student['photo']; ?>" alt="">
+						<input name="old-photo" value="<?php echo $single_student['photo']; ?>" type="hidden">
 					</div>
 					<div class="form-group">
 						<label for="">Photo</label>
-						<input name="photo" class="form-control" type="file">
+						<input name="new_photo" class="form-control" type="file">
 					</div>
 					<div class="form-group">
-						<input name="submit" class="btn btn-primary" type="submit" value="Sign Up">
+						<input name="update" class="btn btn-primary" type="submit" value="Sign Up">
 					</div>
 				</form>
 			</div>
@@ -92,7 +108,6 @@
 	<br>
 	<br>
 	<br>
-
 
 
 
